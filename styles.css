@@ -1,15 +1,21 @@
-/* Rainbow background */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1, #fbc2eb);
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    transition: background 0.5s, color 0.5s;
+  }
+  
+  body.dark {
+    background: #121212;
+    color: white;
   }
   
   @keyframes gradientBG {
@@ -29,19 +35,11 @@ body {
     animation: fadeInUp 0.6s ease;
   }
   
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  body.dark .container {
+    background: #1e1e1e;
   }
   
   h1 {
-    color: #333;
     font-weight: 700;
     margin-bottom: 20px;
   }
@@ -58,13 +56,6 @@ body {
     border-radius: 10px;
     border: 2px solid #ddd;
     font-size: 16px;
-    transition: 0.3s;
-  }
-  
-  input[type="text"]:focus {
-    border-color: #a18cd1;
-    box-shadow: 0 0 8px rgba(161, 140, 209, 0.4);
-    outline: none;
   }
   
   button {
@@ -75,18 +66,11 @@ body {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(255, 120, 170, 0.4);
   }
   
   .task-list {
     list-style: none;
     padding: 0;
-    margin: 0;
   }
   
   .task-list li {
@@ -98,22 +82,12 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    animation: bounceIn 0.4s ease;
+    transition: 0.3s;
   }
   
-  @keyframes bounceIn {
-    0% {
-      transform: scale(0.95);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-  
-  .task-list li:hover {
-    background-color: #e6e6ff;
+  .task-list li.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
   }
   
   .delete-btn {
@@ -122,22 +96,27 @@ body {
     border: none;
     border-radius: 8px;
     padding: 6px 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
   }
   
-  .delete-btn:hover {
-    box-shadow: 0 0 10px rgba(255, 100, 100, 0.4);
-    transform: scale(1.05);
-  }
-  #music-btn {
-    position: fixed;
+  .top-controls {
+    position: absolute;
     top: 20px;
     right: 20px;
-    background: #fff;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
   }
-    
+  
+  #volumeSlider {
+    width: 100px;
+  }
+  
+  #confettiCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+  }
+  
